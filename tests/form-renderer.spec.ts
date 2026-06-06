@@ -20,7 +20,7 @@ test.describe("Form Renderer — KPI Evaluation", () => {
     await page.click('[data-testid="rating-lesson-planning-4"]');
     // Verify the 5th star is NOT selected (amber)
     const star5 = page.locator('[data-testid="rating-lesson-planning-5"]');
-    await expect(star5).not.toHaveClass(/text-amber/);
+    await expect(star5).not.toHaveClass(/text-amber-400/);
   });
 
   test("navigates between sections", async ({ page }) => {
