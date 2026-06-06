@@ -49,7 +49,6 @@ export function FormSection({
       <div className="grid gap-4 sm:grid-cols-2">
         {section.fields.filter(isVisible).map((field) => {
           const props = {
-            key: field.id,
             field,
             value: values[field.id] ?? "",
             error: errors[field.id],
