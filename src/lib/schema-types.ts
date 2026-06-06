@@ -4,6 +4,7 @@ export type FieldType =
   | "select"
   | "multi-select"
   | "date"
+  | "file"
   | "rating";
 
 export interface FieldOption {
@@ -41,6 +42,7 @@ export interface FormField {
 export interface FormSection {
   id: string;
   title: string;
+  description?: string;
   weight?: number;
   fields: FormField[];
 }
@@ -52,6 +54,7 @@ export interface ScoringConfig {
 
 export interface FormSchema {
   title: string;
+  description?: string;
   scoring?: ScoringConfig;
   sections: FormSection[];
 }

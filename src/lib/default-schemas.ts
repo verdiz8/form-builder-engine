@@ -3,11 +3,14 @@ import type { FormSchema } from "./schema-types";
 /** KPI evaluation — the real-world use case this engine was built for */
 export const kpiEvaluation: FormSchema = {
   title: "Teacher KPI Evaluation",
+  description:
+    "Role-based performance review with weighted scoring across professional competence, personal attributes, and additional responsibilities.",
   scoring: { enabled: true, totalWeight: 100 },
   sections: [
     {
       id: "professional-competence",
       title: "Professional Competence",
+      description: "Core teaching and curriculum delivery skills",
       weight: 50,
       fields: [
         {
@@ -49,6 +52,7 @@ export const kpiEvaluation: FormSchema = {
     {
       id: "personal-attributes",
       title: "Personal Attributes",
+      description: "Professional conduct and interpersonal skills",
       weight: 30,
       fields: [
         {
@@ -77,6 +81,7 @@ export const kpiEvaluation: FormSchema = {
     {
       id: "additional-qualities",
       title: "Additional Qualities",
+      description: "Extracurricular contributions and growth mindset",
       weight: 20,
       fields: [
         {
@@ -90,6 +95,18 @@ export const kpiEvaluation: FormSchema = {
             { label: "Sports coach", value: "sports" },
             { label: "Event organiser", value: "events" },
             { label: "Multiple roles", value: "multiple" },
+          ],
+        },
+        {
+          id: "professional-development",
+          type: "multi-select",
+          label: "Professional development activities (this year)",
+          options: [
+            { label: "Workshops attended", value: "workshops" },
+            { label: "Courses completed", value: "courses" },
+            { label: "Conference presentations", value: "conferences" },
+            { label: "Peer mentoring", value: "mentoring" },
+            { label: "Published research", value: "research" },
           ],
         },
         {
@@ -111,6 +128,7 @@ export const kpiEvaluation: FormSchema = {
 /** Simple feedback form — shows the engine works for lightweight use cases too */
 export const feedbackForm: FormSchema = {
   title: "Session Feedback",
+  description: "Help us improve. Your responses are anonymous.",
   sections: [
     {
       id: "feedback",
@@ -157,7 +175,72 @@ export const feedbackForm: FormSchema = {
   ],
 };
 
+/** Customer satisfaction survey — demonstrates a third schema variation */
+export const surveyForm: FormSchema = {
+  title: "Customer Satisfaction Survey",
+  description: "Quarterly NPS survey for product feedback",
+  sections: [
+    {
+      id: "nps",
+      title: "Net Promoter Score",
+      fields: [
+        {
+          id: "nps-score",
+          type: "rating",
+          label: "How likely are you to recommend us?",
+          required: true,
+          maxRating: 10,
+        },
+        {
+          id: "nps-reason",
+          type: "text",
+          label: "What's the main reason for your score?",
+          placeholder: "Tell us why...",
+          validation: { minLength: 10, maxLength: 500 },
+        },
+      ],
+    },
+    {
+      id: "experience",
+      title: "Product Experience",
+      fields: [
+        {
+          id: "usage-frequency",
+          type: "select",
+          label: "How often do you use the product?",
+          required: true,
+          options: [
+            { label: "Daily", value: "daily" },
+            { label: "Weekly", value: "weekly" },
+            { label: "Monthly", value: "monthly" },
+            { label: "Rarely", value: "rarely" },
+          ],
+        },
+        {
+          id: "favorite-features",
+          type: "multi-select",
+          label: "Which features do you use most?",
+          options: [
+            { label: "Dashboard", value: "dashboard" },
+            { label: "Reports", value: "reports" },
+            { label: "API", value: "api" },
+            { label: "Integrations", value: "integrations" },
+            { label: "Mobile app", value: "mobile" },
+          ],
+        },
+        {
+          id: "improvement",
+          type: "text",
+          label: "What should we improve?",
+          placeholder: "Be honest — we can take it...",
+        },
+      ],
+    },
+  ],
+};
+
 export const defaultSchemas: Record<string, FormSchema> = {
   kpi: kpiEvaluation,
   feedback: feedbackForm,
+  survey: surveyForm,
 };

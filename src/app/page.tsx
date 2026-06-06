@@ -73,7 +73,11 @@ export default function Home() {
                       : "border-stone-200 bg-white text-stone-500 hover:border-stone-300"
                   }`}
                 >
-                  {key === "kpi" ? "KPI Evaluation" : "Feedback Form"}
+                  {key === "kpi"
+                    ? "KPI Evaluation"
+                    : key === "feedback"
+                      ? "Feedback Form"
+                      : "Survey"}
                 </button>
               ))}
             </div>
@@ -106,6 +110,9 @@ export default function Home() {
                   >
                     {schema.title}
                   </h2>
+                  {schema.description && (
+                    <p className="mt-1 text-sm text-stone-500">{schema.description}</p>
+                  )}
                   {schema.scoring?.enabled && (
                     <span className="mt-2 inline-block rounded-full bg-amber-50 px-2.5 py-0.5 text-[10px] font-medium text-amber-700">
                       Weighted scoring enabled

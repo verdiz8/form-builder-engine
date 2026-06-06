@@ -5,6 +5,7 @@ import {
   NumberField,
   SelectField,
   DateField,
+  FileUploadField,
   RatingField,
 } from "@/components/fields";
 
@@ -35,6 +36,9 @@ export function FormSection({
         <legend className="text-base font-semibold text-stone-800">
           {section.title}
         </legend>
+        {section.description && (
+          <p className="mt-0.5 text-xs text-stone-500">{section.description}</p>
+        )}
         {section.weight && (
           <span className="mt-1 inline-block rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-medium text-emerald-700">
             Weight: {section.weight}%
@@ -53,7 +57,10 @@ export function FormSection({
             onBlur: () => onBlur(field.id),
           };
 
-          const wrapClass = field.type === "text" ? "sm:col-span-2" : "";
+          const wrapClass =
+            field.type === "text" || field.type === "file"
+              ? "sm:col-span-2"
+              : "";
 
           return (
             <div key={field.id} className={wrapClass}>
@@ -64,6 +71,7 @@ export function FormSection({
                 <SelectField {...props} multiple />
               )}
               {field.type === "date" && <DateField {...props} />}
+              {field.type === "file" && <FileUploadField {...props} />}
               {field.type === "rating" && <RatingField {...props} />}
             </div>
           );
