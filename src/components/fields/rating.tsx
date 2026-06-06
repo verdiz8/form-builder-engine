@@ -30,7 +30,7 @@ export function RatingField({ field, value, error, onChange, onBlur }: Props) {
             type="button"
             data-testid={`rating-${field.id}-${star}`}
             onClick={() => onChange(String(star))}
-            className={`text-2xl transition-colors ${
+            className={`text-2xl transition-colors min-w-[28px] ${
               star <= current
                 ? "text-amber-400"
                 : "text-stone-200 hover:text-amber-200"

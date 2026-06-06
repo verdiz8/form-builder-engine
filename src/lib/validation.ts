@@ -28,13 +28,13 @@ export function validateField(
 
   switch (field.type) {
     case "number":
-      return validateNumber(v, value as number);
+      return validateNumber(v, value);
     case "text":
       return validateText(v, value as string);
     case "rating":
       return validateNumber(
         { min: 1, max: field.maxRating ?? 5 },
-        value as number
+        value
       );
     default:
       return { valid: true };
@@ -43,15 +43,17 @@ export function validateField(
 
 function validateNumber(
   v: FieldValidation,
-  value: number
+  value: unknown
 ): ValidationResult {
-  if (typeof value !== "number" || isNaN(value)) {
+  // Coerce string values (e.g. from rating buttons or text inputs)
+  const num = typeof value === "number" ? value : Number(value);
+  if (typeof value !== "number" && (typeof value !== "string" || value === "" || isNaN(num))) {
     return { valid: false, error: "Must be a number" };
   }
-  if (v.min !== undefined && value < v.min) {
+  if (v.min !== undefined && num < v.min) {
     return { valid: false, error: `Minimum value is ${v.min}` };
   }
-  if (v.max !== undefined && value > v.max) {
+  if (v.max !== undefined && num > v.max) {
     return { valid: false, error: `Maximum value is ${v.max}` };
   }
   return { valid: true };

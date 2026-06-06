@@ -7,7 +7,7 @@ test.describe("Conditional field visibility", () => {
     await page.waitForSelector('[data-testid="form-renderer"]');
   });
 
-  test("conditional field hidden by default", async () => {
+  test("conditional field hidden by default", async ({ page }) => {
     // Navigate to section 3 (Additional Qualities)
     const ratingFields = ["lesson-planning", "classroom-delivery", "assessment-practices", "curriculum-knowledge"];
     for (const id of ratingFields) {
@@ -24,7 +24,7 @@ test.describe("Conditional field visibility", () => {
     await expect(page.locator('[data-testid="field-digital-literacy"]')).not.toBeVisible();
   });
 
-  test("conditional field appears when condition met", async () => {
+  test("conditional field appears when condition met", async ({ page }) => {
     // Navigate to section 3
     const ratingFields = ["lesson-planning", "classroom-delivery", "assessment-practices", "curriculum-knowledge"];
     for (const id of ratingFields) {

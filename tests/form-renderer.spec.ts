@@ -8,14 +8,14 @@ test.describe("Form Renderer — KPI Evaluation", () => {
     await page.waitForSelector('[data-testid="form-renderer"]');
   });
 
-  test("renders form title and first section", async () => {
+  test("renders form title and first section", async ({ page }) => {
     await expect(page.locator('[data-testid="form-title"]')).toContainText("Teacher KPI Evaluation");
     // First section fields should be visible
     await expect(page.locator('[data-testid="field-lesson-planning"]')).toBeVisible();
     await expect(page.locator('[data-testid="field-classroom-delivery"]')).toBeVisible();
   });
 
-  test("star rating registers click", async () => {
+  test("star rating registers click", async ({ page }) => {
     // Click 4th star on first rating field
     await page.click('[data-testid="rating-lesson-planning-4"]');
     // Verify the 5th star is NOT selected (amber)
@@ -23,7 +23,7 @@ test.describe("Form Renderer — KPI Evaluation", () => {
     await expect(star5).not.toHaveClass(/text-amber/);
   });
 
-  test("navigates between sections", async () => {
+  test("navigates between sections", async ({ page }) => {
     // Section 1 should be visible
     await expect(page.locator('[data-testid="field-lesson-planning"]')).toBeVisible();
 
